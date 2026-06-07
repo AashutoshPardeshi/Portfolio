@@ -849,21 +849,30 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Fake form submit (no backend)
-  function submitForm() {
+  // Original form submit (no backend)
+ async function submitForm() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
     const msg = document.getElementById('message').value;
     if (!name || !email || !msg) {
       alert('Please fill in all required fields.');
       return;
     }
-    document.getElementById('form-success').style.display = 'block';
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('subject').value = '';
-    document.getElementById('message').value = '';
-  }
-</script>
+    const response = await fetch('https://formspree.io/f/mdaveyep', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, subject, message: msg })
+    });
+    if (response.ok) {
+      document.getElementById('form-success').style.display = 'block';
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('subject').value = '';
+      document.getElementById('message').value = '';
+    } else {
+      alert('Something went wrong. Please email me directly.');
+    }
+  }>
 </body>
 </html>
