@@ -849,8 +849,8 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Original form submit (no backend)
- async function submitForm() {
+  // Original Form form submit (no backend)
+async function submitForm() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const subject = document.getElementById('subject').value;
@@ -873,6 +873,7 @@
     } else {
       alert('Something went wrong. Please email me directly.');
     }
-  }>
+  }
+</script>
 </body>
 </html>
